@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
@@ -43,6 +43,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Intellenum" Version="2.0.1" />
+        <PackageReference Include="Soenneker.Gen.EnumValues" Version="4.0.6" />
     </ItemGroup>
 </Project>
