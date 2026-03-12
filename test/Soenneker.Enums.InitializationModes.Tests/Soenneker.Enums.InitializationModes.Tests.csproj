@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Enums.InitializationModes.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Enums.InitializationModes\Soenneker.Enums.InitializationModes.csproj" />
     </ItemGroup>
 
     <ItemGroup>
