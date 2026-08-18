@@ -3,7 +3,7 @@ using Soenneker.Gen.EnumValues;
 namespace Soenneker.Enums.InitializationModes;
 
 /// <summary>
-/// Defines how an instance is initialized (sync or async), including whether a key and/or cancellation token is used.
+/// Identifies whether initialization is synchronous or asynchronous and whether it accepts a key or cancellation token.
 /// </summary>
 [EnumValue<string>]
 public partial class InitializationMode
