@@ -5,7 +5,7 @@
 
 # Soenneker.Enums.InitializationModes
 
-Identifies whether initialization is synchronous or asynchronous and whether it accepts a key or cancellation token.
+A string-backed enum-value type for selecting an initializer signature by execution style and accepted arguments.
 
 ## Install
 
@@ -13,17 +13,29 @@ Identifies whether initialization is synchronous or asynchronous and whether it 
 dotnet add package Soenneker.Enums.InitializationModes
 ```
 
-## What you get
+## Usage
 
-- `InitializationMode` — Identifies whether initialization is synchronous or asynchronous and whether it accepts a key or cancellation token.
+```csharp
+using Soenneker.Enums.InitializationModes;
 
-## API at a glance
+InitializationMode mode = InitializationMode.AsyncKeyToken;
+string wireValue = mode.Value; // "AsyncKeyToken"
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `InitializationMode.AsyncKey` | Asynchronous initialization using a key. | Asynchronous initialization using a key. |
-| `InitializationMode.AsyncKeyToken` | Asynchronous initialization using a key and a cancellation token. | Asynchronous initialization using a key and a cancellation token. |
-| `InitializationMode.Async` | Asynchronous initialization without a key. | Asynchronous initialization without a key. |
-| `InitializationMode.Sync` | Synchronous initialization without a key. | Synchronous initialization without a key. |
-| `InitializationMode.SyncKey` | Synchronous initialization using a key. | Synchronous initialization using a key. |
-| `InitializationMode.SyncKeyToken` | Synchronous initialization using a key and a cancellation token. | Synchronous initialization using a key and a cancellation token. |
+if (InitializationMode.TryFromValue(input, out InitializationMode? parsed))
+{
+    // Select the initializer signature represented by parsed
+}
+```
+
+| Value | Async | Key | Cancellation token |
+| --- | --- | --- | --- |
+| `Async` | Yes | No | No |
+| `AsyncKey` | Yes | Yes | No |
+| `AsyncKeyToken` | Yes | Yes | Yes |
+| `Sync` | No | No | No |
+| `SyncKey` | No | Yes | No |
+| `SyncKeyToken` | No | Yes | Yes |
+
+`System.Text.Json` serializes the type as the shown string value. `FromValue` throws for unknown input; use `TryFromValue` at configuration or request boundaries. `FromName` and `TryFromName` are also generated.
+
+This package describes an initialization shape; it does not invoke an initializer, store a key, create a cancellation token, or enforce cancellation. The consuming component defines the key type and the exact semantics of each mode.
